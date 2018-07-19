@@ -70,4 +70,5 @@ class AdminsController extends Controller
         $admin->delete();
         return redirect()->route('admins.index')->with('success','删除成功!');
     }
+
 }

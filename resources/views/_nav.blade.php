@@ -43,19 +43,20 @@
                 <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
             </form>
             <ul class="nav navbar-nav navbar-right">
-
-                <li><a href=""><span class="glyphicon glyphicon-user"></span>&emsp;登录</a></li>
-
+                @guest
+                <li><a data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-user" ></span>&emsp;登录</a></li>
+@endguest
+                @auth
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">用户名 <span class="caret"></span></a>
+                       aria-expanded="false">欢迎您  ! {{auth()->user()->name}} <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="#"><span class="glyphicon glyphicon-paperclip"></span>&emsp;个人中心</a></li>
                         <li><a href="#"><span class="glyphicon glyphicon-erase"></span>&emsp;修改资料</a></li>
-                        <li><a href="#"><span class="glyphicon glyphicon-scissors"></span>&emsp;修改密码</a></li>
+                        <li><a href="{{route('reset')}}"><span class="glyphicon glyphicon-scissors"></span>&emsp;修改密码</a></li>
                         <li role="separator" class="divider"></li>
                         <li>
-                            <form action="" method="post">
+                            <form action="{{route('logout')}}" method="post">
                                 <button class="btn btn-link"><span class="glyphicon glyphicon-off"></span>&emsp;安全退出</button>
                                 {{method_field('DELETE')}}
                                 {{csrf_field()}}
@@ -63,6 +64,7 @@
                         </li>
                     </ul>
                 </li>
+                @endauth
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->

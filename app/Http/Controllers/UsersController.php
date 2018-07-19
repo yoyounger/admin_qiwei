@@ -33,4 +33,25 @@ class UsersController extends Controller
         $user->delete();
         return redirect()->route('users.index')->with('success','删除成功!');
     }
+    //重置账户密码
+    public function set(User $user)
+    {
+        return view('Users/password',compact('user'));
+    }
+
+    public function repassword(User $user,Request $request)
+    {
+        $this->validate($request,[
+            'newpassword'=>'required|min:6',
+        ],[
+            'newpassword.required'=>'新密码不能为空!',
+            'newpassword.min'=>'新密码至少6位!',
+        ]);
+            if ($request->newpassword !=$request->repassword){
+                return back()->with('danger','新密码与确认密码不匹配!')->withInput();
+            }
+            $user->update(['password'=>bcrypt($request->newpassword)]);
+
+            return redirect()->route('users.index')->with('success','修改密码成功!');
+        }
 }

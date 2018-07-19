@@ -20,11 +20,49 @@
 <body>
 
 @include('_nav')
+{{--模态框--}}
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">管理员登录</h4>
+            </div>
+            <div class="modal-body">
+                <form action="{{route('login')}}" method="post">
+                    <div class="form-group">
+                        <input type="text" placeholder="管理员名" name="name" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" placeholder="密码" name="password" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input id="captcha" class="form-control" name="captcha" placeholder="验证码">
+                        <img class="thumbnail captcha" src="{{ captcha_src('default') }}" onclick="this.src='/captcha/default?'+Math.random()" title="点击图片重新获取验证码">
+                    </div>
+                    <button class="btn btn-info form-control">登录</button>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="remember"> 记住我
+                        </label>
+                    </div>
+                    {{csrf_field()}}
+                </form>
+
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 <div class="row container-fluid" >
     <div class="list-group col-xs-2">
         <a href="{{route('shops.index')}}" class="list-group-item active">入驻商家管理</a>
+        <a href="{{route('users.index')}}" class="list-group-item">商家账户管理</a>
         <a href="{{route('shopcategories.index')}}" class="list-group-item">商家分类管理</a>
-        <a href="{{route('users.index')}}" class="list-group-item">商户账户管理</a>
         <a href="{{route('admins.index')}}" class="list-group-item">管理员列表</a>
     </div>
     <div class="col-xs-1">

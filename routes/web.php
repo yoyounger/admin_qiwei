@@ -26,3 +26,16 @@ Route::post('no','UsersController@no')->name('no');
 Route::resource('users','UsersController');
 //管理员
 Route::resource('admins','AdminsController');
+//管理员登录
+Route::get('login','SessionsController@login')->name('login');
+Route::post('login','SessionsController@store')->name('login');
+Route::delete('logout','SessionsController@destroy')->name('logout');
+//管理员登录修改个人密码
+Route::post('password','SessionsController@password')->name('password');
+Route::get('reset','SessionsController@reset')->name('reset');
+//重置商户密码
+Route::get('set/{user}','UsersController@set')->name('set');
+Route::post('repassword{user}','UsersController@repassword')->name('repassword');
+
+
+

@@ -1,7 +1,9 @@
 @extends('default')
 @section('contents')
     <h2>商家账户</h2>
-
+    <br>
+    <br>
+    <br>
     <table class="table table-bordered" style="text-align: center">
         <tr>
             <th style="text-align: center">ID</th>
@@ -9,7 +11,7 @@
             <th style="text-align: center">邮箱</th>
             <th style="text-align: center">拥有店铺</th>
             <th style="text-align: center">账户状态</th>
-            <th width="20%" style="text-align: center">操作</th>
+            <th width="30%" style="text-align: center">操作</th>
         </tr>
         @foreach($users as $user)
             <tr>
@@ -25,7 +27,7 @@
                         <input type="hidden" value="{{$user->status}}" name="status">
                         <input type="hidden" value="{{$user->id}}" name="id">
                         @if($user->status == 0)
-                            <button type="submit" class="btn btn-primary">审核通过</button>
+                            <button type="submit" class="btn btn-success">审核通过</button>
                         @endif
                         @if($user->status == 1 )
                             <button type="submit" class="btn btn-warning">账户禁用</button>
@@ -33,7 +35,12 @@
                         {{csrf_field()}}
                     </form>
                         </div>
-                        <div class="col-xs-4">
+                        <div class="col-xs-2">
+                        </div>
+                        <div class="col-xs-2">
+                            <a href="{{route('set',[$user])}}" class="btn btn-primary">重置密码</a>
+                        </div>
+                        <div class="col-xs-2">
                         </div>
                         <div class="col-xs-2">
                             <form action="{{route('users.destroy',[$user])}}" method="post">
@@ -42,6 +49,7 @@
                                 {{method_field('DELETE')}}
                             </form>
                         </div>
+
                     </div>
                 </td>
             </tr>
