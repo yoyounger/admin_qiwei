@@ -2,11 +2,10 @@
 
 namespace App;
 
-use App\Models\Shop;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+class Admin extends Authenticatable
 {
     use Notifiable;
 
@@ -16,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','status','shop_id',
+        'name', 'email', 'password',
     ];
 
     /**
@@ -27,9 +26,4 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-    //关联商铺
-    public function shop()
-    {
-        return $this->hasOne(Shop::class,'id','shop_id');
-    }
 }

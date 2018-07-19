@@ -14,3 +14,15 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+//商家分类
+Route::resource('shopcategories','ShopCategoriesController');
+//商家
+Route::resource('shops','ShopsController');
+//商家审核操作
+Route::post('yes','ShopsController@yes')->name('yes');
+Route::post('no','UsersController@no')->name('no');
+//账户
+Route::resource('users','UsersController');
+//管理员
+Route::resource('admins','AdminsController');
