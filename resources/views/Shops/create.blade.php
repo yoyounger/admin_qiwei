@@ -53,7 +53,9 @@
                     <select name="shop_category_id" id="" class="form-control" >
                         <option value="">请选择</option>
                         @foreach($categories as $category)
+                            @if($category->status)
                         <option value="{{$category->id}}">{{$category->name}}</option>
+                            @endif
                             @endforeach
                     </select>
             </tr>

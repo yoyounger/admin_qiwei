@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Shop;
 use App\Models\ShopCategory;
 use Illuminate\Http\Request;
 
@@ -67,6 +68,10 @@ class ShopCategoriesController extends Controller
     //删除分类
     public function destroy(ShopCategory $shopcategory)
     {
+        $res = Shop::where('shop_category_id',$shopcategory->id)->get();
+        if ($res){
+            return back()->with('danger','该分类有商家不能删除!')->withInput();
+        }
         $shopcategory->delete();
         return redirect()->route('shopcategories.index')->with('success','删除成功!');
     }

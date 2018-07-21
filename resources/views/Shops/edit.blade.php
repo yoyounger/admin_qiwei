@@ -18,7 +18,9 @@
                 <td>
                     <select name="shop_category_id" id="" class="form-control" >
                         @foreach($categories as $category)
+                            @if($category->status)
                         <option value="{{$category->id}}" @if($category->id == $shop->shop_category_id) checked @endif>{{$category->name}}</option>
+                            @endif
                         @endforeach
                     </select>
             </tr>

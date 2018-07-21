@@ -29,8 +29,8 @@ class ShopsController extends Controller
             return back()->with('danger','密码必须和确认密码一致!')->withInput();
         }
         $this->validate($request,[
-            'name'=>'required|max:10',
-            'email'=>'required',
+            'name'=>'required|max:10|unique:users',
+            'email'=>'required|email|unique:users',
             'password'=>'required|min:6',
             'repassword'=>'required|min:6',
             'shop_category_id'=>'required',
@@ -41,7 +41,10 @@ class ShopsController extends Controller
         ],[
             'name.required'=>'账户名不能为空!',
             'name.max'=>'账户名不能超过10字!',
+            'name.unique'=>'您输入的账户名已经存在!',
             'email.required'=>'账户邮箱不能为空!',
+            'email.email'=>'邮箱格式错误!',
+            'email.unique'=>'该邮箱已经存在!',
             'password.required'=>'账户密码不能为空!',
             'password.min'=>'账户密码不能少于6位!',
             'repassword.required'=>'账户确认密码不能为空!',
@@ -99,22 +102,16 @@ class ShopsController extends Controller
     //修改商户信息
     public function edit(Shop $shop){
         $categories = ShopCategory::all();
-//        $user = User::where('shop_id','=',$shop->id)->first();
         return view('Shops/edit',compact('shop','categories'));
     }
     public function update(Shop $shop,Request $request)
     {
         $this->validate($request,[
-//            'name'=>'required|max:10',
-//            'email'=>'required',
             'shop_category_id'=>'required',
             'shop_name'=>'required|max:10',
             'start_send'=>'required',
             'send_cost'=>'required',
         ],[
-//            'name.required'=>'账户名不能为空!',
-//            'name.max'=>'账户名不能超过10字!',
-//            'email.required'=>'账户邮箱不能为空!',
             'shop_category_id.required'=>'店铺分类不能为空!',
             'shop_name.required'=>'店铺名称不能为空!',
             'shop_name.max'=>'店铺名称不能超过10字!',
@@ -129,7 +126,6 @@ class ShopsController extends Controller
         $zhun = $request->zhun??0;
         $notice = $request->notice??'暂无';
         $discount = $request->discount??'暂无';
-//        $status2 = $request->status2??0;
         //修改商家信息
         $data = [
             'shop_category_id'=>$request->shop_category_id,
@@ -151,12 +147,6 @@ class ShopsController extends Controller
         if ($shop_img){
             $data['shop_img'] = $shop_img->store('public/shop_img');
         }
-//        $shop->update($data);
-//        $user->update([
-//            'name'=>$request->name,
-//            'email'=>$request->email,
-//            'status'=>$request->status2,
-//        ]);
         return redirect()->route('shops.index')->with('success','修改成功!');
     }
     //删除商铺
