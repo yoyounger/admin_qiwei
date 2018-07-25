@@ -8,19 +8,39 @@
         <table class="table table-bordered">
             <tr>
                 <td>管理员</td>
-                <td><input type="text" name="name" class="form-control" value="{{old('name')}}"></td>
+                <td>
+                    <div class="input-group">
+                        <span class="input-group-addon glyphicon glyphicon-user" ></span>
+                        <input type="text" name="name" class="form-control" value="{{old('name')}}">
+                    </div>
+                </td>
             </tr>
             <tr>
                 <td>邮箱</td>
-                <td><input type="text" name="email" class="form-control" value="{{old('email')}}"></td>
+                <td>
+                    <div class="input-group">
+                        <span class="input-group-addon glyphicon glyphicon-envelope" ></span>
+                        <input type="text" name="email" class="form-control" value="{{old('email')}}">
+                    </div>
+                </td>
             </tr>
             <tr>
                 <td>密码</td>
-                <td><input type="password" name="password" class="form-control" value="{{old('password')}}"></td>
+                <td>
+                    <div class="input-group">
+                        <span class="input-group-addon glyphicon glyphicon-lock" ></span>
+                        <input type="text" name="password" class="form-control" value="{{old('password')}}">
+                    </div>
+                    </td>
             </tr>
             <tr>
                 <td>确认密码</td>
-                <td><input type="password" name="repassword" class="form-control"></td>
+                <td>
+                    <div class="input-group">
+                        <span class="input-group-addon glyphicon glyphicon-lock" ></span>
+                        <input type="text" name="repassword" class="form-control"  >
+                    </div>
+                </td>
             </tr>
             <tr>
                 <td></td>

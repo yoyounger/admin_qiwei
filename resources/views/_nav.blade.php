@@ -69,5 +69,4 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
-<hr>
 <!--导航条-->

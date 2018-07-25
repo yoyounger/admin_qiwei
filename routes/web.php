@@ -36,6 +36,16 @@ Route::get('reset','SessionsController@reset')->name('reset');
 //重置商户密码
 Route::get('set/{user}','UsersController@set')->name('set');
 Route::post('repassword{user}','UsersController@repassword')->name('repassword');
+//活动编写
+Route::resource('activities','ActivitiesController');
+
+Route::post('adminImg',function (){
+    $storage = \Illuminate\Support\Facades\Storage::disk('oss');
+    $filename = $storage->putFile('adminImg',request()->file('file'));
+    return [
+        'filename'=>$storage->url($filename)
+    ];
+})->name('adminImg');
 
 
 

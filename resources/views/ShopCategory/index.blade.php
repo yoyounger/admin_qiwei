@@ -16,7 +16,7 @@
         <tr>
             <td>{{$shopcategory->id}}</td>
             <td>{{$shopcategory->name}}</td>
-            <td><img src="{{\Illuminate\Support\Facades\Storage::url($shopcategory->img)}}" alt="" class="img-circle" width="50px"></td>
+            <td><img src="{{$shopcategory->img}}" alt="" class="img-circle" width="50px"></td>
             <td>@if($shopcategory->status) 显示@else 隐藏 @endif</td>
             <td style="padding-left: 80px">
                 <div class="row">

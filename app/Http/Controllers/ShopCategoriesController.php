@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Shop;
 use App\Models\ShopCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Psy\Util\Str;
 
 class ShopCategoriesController extends Controller
 {
@@ -31,10 +33,9 @@ class ShopCategoriesController extends Controller
             'img.required'=>'分类图片不能为空!',
         ]);
         $status = $request->status??0;
-        $img = $request->file('img')->store('public/img');
         ShopCategory::create([
             'name'=>$request->name,
-            'img'=>$img,
+            'img'=>$request->img,
             'status'=>$status,
         ]);
         return redirect()->route('shopcategories.index')->with('success','添加成功!');
@@ -54,13 +55,13 @@ class ShopCategoriesController extends Controller
             'name.max'=>'分类名不能超过10个字',
         ]);
         $status = $request->status??0;
-        $img = $request->file('img');
+        $img = $request->img;
         $data = [
             'name'=>$request->name,
             'status'=>$status,
         ];
         if ($img){
-            $data['img']=$img->store('public/img');
+            $data['img']=$img;
         }
         $shopcategory->update($data);
         return redirect()->route('shopcategories.index')->with('success','修改成功!');

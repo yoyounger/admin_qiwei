@@ -60,8 +60,6 @@ class ShopsController extends Controller
         //创建商家信息
 
         DB::transaction(function () use($request){
-            $shop_img = $request->file('shop_img')->store('public/shop_img');
-            $shop_img = Storage::url($shop_img);
             $brand = $request->brand??0;
             $on_time = $request->on_time??0;
             $fengniao = $request->fengniao??0;
@@ -73,7 +71,7 @@ class ShopsController extends Controller
             $shop = Shop::create([
                 'shop_category_id'=>$request->shop_category_id,
                 'shop_name'=>$request->shop_name,
-                'shop_img'=>url($shop_img),
+                'shop_img'=>$request->shop_img,
                 'shop_rating'=>$request->shop_rating,
                 'brand'=>$brand,
                 'on_time'=>$on_time,
@@ -143,10 +141,11 @@ class ShopsController extends Controller
             'discount'=>$discount,
             'status'=>$request->status,
         ];
-        $shop_img =  $request->file('shop_img');
+        $shop_img =  $request->shop_img;
         if ($shop_img){
-            $data['shop_img'] = $shop_img->store('public/shop_img');
+            $data['shop_img'] = $shop_img;
         }
+        $shop->update($data);
         return redirect()->route('shops.index')->with('success','修改成功!');
     }
     //删除商铺
