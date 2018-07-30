@@ -46,6 +46,15 @@ Route::post('adminImg',function (){
         'filename'=>$storage->url($filename)
     ];
 })->name('adminImg');
+//订单统计
+Route::get('CountOrder','CountController@CountOrder')->name('CountOrder');
+Route::get('CountMenu','CountController@CountMenu')->name('CountMenu');
+//平台会员管理
+Route::resource('customers','CustomersController');
+Route::get('change','CustomersController@change')->name('change');
+//权限管理
+Route::resource('permissions','PermissionsController');
+Route::resource('roles','RolesController');
 
 
 

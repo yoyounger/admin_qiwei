@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <title>奇味--平台端</title>
+    <title>当味小外--平台端</title>
 
     <!-- Bootstrap -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -74,6 +74,9 @@
         <a href="{{route('shopcategories.index')}}" class="list-group-item">商家分类管理</a>
         <a href="{{route('admins.index')}}" class="list-group-item">管理员列表</a>
         <a href="{{route('activities.index')}}" class="list-group-item">活动管理</a>
+        <a href="{{route('CountOrder')}}" class="list-group-item">商家订单量统计</a>
+        <a href="{{route('CountMenu')}}" class="list-group-item">商家菜品销量统计</a>
+        <a href="{{route('customers.index')}}" class="list-group-item">平台会员管理</a>
     </div>
     <div class="col-xs-1">
     </div>
