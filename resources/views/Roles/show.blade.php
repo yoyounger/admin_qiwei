@@ -11,7 +11,7 @@
             <tr>
                 <td>角色权限</td>
                 <td>
-                    @foreach($role->permissions as $permission)
+                    @foreach($permissions as $permission)
                         @if($role->hasPermissionTo($permission))
                             {{$permission->name}} |
                         @endif

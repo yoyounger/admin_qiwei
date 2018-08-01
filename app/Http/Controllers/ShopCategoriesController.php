@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Shop;
 use App\Models\ShopCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Psy\Util\Str;
 
@@ -19,12 +20,16 @@ class ShopCategoriesController extends Controller
     //分类列表
     public function index()
     {
+
         $shopcategories = ShopCategory::paginate(10);
         return view('ShopCategory/index',compact('shopcategories'));
     }
     //添加分类
     public function create()
     {
+        if (!Auth::user()->can('商家分类添加')){
+            return view('403');
+        }
         return view('ShopCategory/create');
     }
 
@@ -49,6 +54,9 @@ class ShopCategoriesController extends Controller
     //修改分类
     public function edit(ShopCategory $shopcategory)
     {
+        if (!Auth::user()->can('商家分类修改')){
+            return view('403');
+        }
         return view('ShopCategory/edit',compact('shopcategory'));
     }
 
@@ -75,6 +83,9 @@ class ShopCategoriesController extends Controller
     //删除分类
     public function destroy(ShopCategory $shopcategory)
     {
+        if (!Auth::user()->can('商家分类删除')){
+            return view('403');
+        }
         $res = Shop::where('shop_category_id',$shopcategory->id)->get();
         if ($res){
             return back()->with('danger','该分类有商家不能删除!')->withInput();

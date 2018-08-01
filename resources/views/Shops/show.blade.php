@@ -132,6 +132,8 @@
                     <form action="{{route('yes',[$shop])}}" method="post">
                         <input type="hidden" value="{{$shop->status}}" name="status">
                         <input type="hidden" value="{{$shop->id}}" name="id">
+                        <input type="hidden" value="{{$user->email}}" name="email">
+                        <input type="hidden" value="{{$user->name}}" name="name">
                         @if($shop->status == -1 || $shop->status == 0)
                         <button type="submit" class="btn btn-primary">审核通过</button>
                         @endif

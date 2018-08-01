@@ -55,6 +55,6 @@ Route::get('change','CustomersController@change')->name('change');
 //权限管理
 Route::resource('permissions','PermissionsController');
 Route::resource('roles','RolesController');
-
-
-
+//导航菜单
+Route::resource('navs','NavsController');
+Route::get('left','NavsController@left')->name('left');

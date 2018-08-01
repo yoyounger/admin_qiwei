@@ -2,7 +2,7 @@
 @section('contents')
     <h2>管理员账户</h2>
 
-    @role('管理员CRUD')
+    @role('管理员管理')
      <a class="btn btn-primary" href="{{route('admins.create')}}" style="float: right;margin: 20px"><span class="glyphicon glyphicon-plus"></span>&emsp;添加管理员</a>
     @endrole
     <table class="table table-bordered" style="text-align: center">
@@ -24,7 +24,7 @@
                     </div>
                     <div class="col-xs-1">
                     </div>
-                    @role('管理员CRUD')
+                    @role('管理员管理')
                     <div class="col-xs-2">
                         <a href="{{route('admins.edit',[$admin])}}" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span></a>
                     </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Activity;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ActivitiesController extends Controller
 {
@@ -50,6 +51,9 @@ class ActivitiesController extends Controller
     //添加店铺活动
     public function create()
     {
+        if (!Auth::user()->can('添加活动')){
+            return view('403');
+        }
         return view('Activities/create');
     }
 
@@ -82,6 +86,9 @@ class ActivitiesController extends Controller
     //修改店铺活动
     public function edit(Activity $activity)
     {
+        if (!Auth::user()->can('活动修改')){
+            return view('403');
+        }
         return view('Activities/edit',compact('activity'));
     }
 
@@ -113,6 +120,10 @@ class ActivitiesController extends Controller
     //删除活动
     public function destroy(Activity $activity)
     {
+
+        if (!Auth::user()->can('活动删除')){
+            return view('403');
+        }
         $activity->delete();
         return redirect()->route('activities.index')->with('success','删除活动成功!');
     }

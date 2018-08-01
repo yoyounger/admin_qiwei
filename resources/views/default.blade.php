@@ -35,14 +35,25 @@
 
 <div class="row container-fluid" >
     <div class="list-group col-xs-2">
-        <a href="{{route('shops.index')}}" class="list-group-item active">入驻商家管理</a>
-        <a href="{{route('users.index')}}" class="list-group-item">商家账户管理</a>
-        <a href="{{route('shopcategories.index')}}" class="list-group-item">商家分类管理</a>
-        <a href="{{route('admins.index')}}" class="list-group-item">管理员列表</a>
-        <a href="{{route('activities.index')}}" class="list-group-item">活动管理</a>
-        <a href="{{route('CountOrder')}}" class="list-group-item">商家订单量统计</a>
-        <a href="{{route('CountMenu')}}" class="list-group-item">商家菜品销量统计</a>
-        <a href="{{route('customers.index')}}" class="list-group-item">平台会员管理</a>
+        <ul class="nav nav-pills nav-stacked">
+            @foreach(\App\Models\Nav::all() as $nav)
+                @if($nav->pid == 0)
+                    <li class="dropdown">
+                        <a href="{{route($nav->url)}}" class="dropdown-toggle list-group-item" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">{{$nav->name}}<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            @foreach(\App\Models\Nav::all() as $val)
+                                @if($val->pid == $nav->id)
+                                    <li><a href="{{route($val->url)}}">{{$val->name}}</a></li>
+                                @endif
+                            @endforeach
+                        </ul>
+                    </li>
+                @endif
+            @endforeach
+        </ul>
+
+
     </div>
     <div class="col-xs-1">
     </div>

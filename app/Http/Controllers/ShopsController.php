@@ -6,7 +6,9 @@ use App\Models\Shop;
 use App\Models\ShopCategory;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class ShopsController extends Controller
@@ -26,6 +28,9 @@ class ShopsController extends Controller
     //添加商家
     public function create()
     {
+        if (!Auth::user()->can('添加商家')){
+            return view('403');
+        }
         $categories = ShopCategory::all();
         return view('Shops/create',compact('categories'));
     }
@@ -104,7 +109,11 @@ class ShopsController extends Controller
         return redirect()->route('shops.index')->with('success','添加成功!');
     }
     //修改商户信息
-    public function edit(Shop $shop){
+    public function edit(Shop $shop)
+    {
+        if (!Auth::user()->can('修改商家')){
+            return view('403');
+        }
         $categories = ShopCategory::all();
         return view('Shops/edit',compact('shop','categories'));
     }
@@ -157,6 +166,9 @@ class ShopsController extends Controller
     //删除商铺
     public function destroy(Shop $shop)
     {
+        if (!Auth::user()->can('删除商家')){
+            return view('403');
+        }
         User::where('shop_id','=',$shop->id)->delete();
         $shop->delete();
         return redirect()->route('shops.index')->with('success','删除成功!');
@@ -170,10 +182,25 @@ class ShopsController extends Controller
     //修改商家状态
     public function yes(Request $request)
     {
+        if (!Auth::user()->can('商家注册资料审核')){
+            return view('403');
+        }
+
        if($request->status == -1){
             Shop::where('id',$request->id)->update(['status'=>1]);
+            //审核通过发邮箱提醒
+
+           Mail::raw('尊敬的'.$request->name.'您的店铺已经审核通过,请注意登录验证!!!',function ($message) use($request){
+               $message->subject('资料审核通知');
+               $message->to($request->email);
+           });
        }elseif ($request->status == 1){
            Shop::where('id',$request->id)->update(['status'=>-1]);
+           //审核通过发邮箱提醒
+           Mail::raw('尊敬的'.$request->name.'您的店铺已经被禁用,请及时联系管理员!!!',function ($message) use($request){
+               $message->subject('资料审核通知');
+               $message->to($request->email);
+           });
        };
         return back();
     }

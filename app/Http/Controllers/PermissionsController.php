@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Permission;
 
 class PermissionsController extends Controller
@@ -16,12 +17,18 @@ class PermissionsController extends Controller
     //权限列表
     public function index()
     {
+        if (!Auth::user()->can('RBAC管理')){
+            return view('403');
+        }
         $permissions = Permission::paginate(10);
         return view('Permissions/index',compact('permissions'));
     }
     //添加权限
     public function create()
     {
+        if (!Auth::user()->can('RBAC管理')){
+            return view('403');
+        }
         return view('Permissions/create');
     }
 
@@ -38,6 +45,9 @@ class PermissionsController extends Controller
     //修改权限
     public function edit(Permission $permission)
     {
+        if (!Auth::user()->can('RBAC管理')){
+            return view('403');
+        }
         return view('Permissions.edit',compact('permission'));
     }
 
@@ -56,6 +66,9 @@ class PermissionsController extends Controller
     //删除权限
     public function destroy(Permission $permission)
     {
+        if (!Auth::user()->can('RBAC管理')){
+            return view('403');
+        }
         $permission->delete();
         return redirect()->route('permissions.index')->with('success','删除成功!');
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Admin;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Spatie\Permission\Models\Role;
 
@@ -31,6 +32,9 @@ class AdminsController extends Controller
     //新增管理员
     public function create()
     {
+        if (!Auth::user()->can('管理员添加')){
+            return view('403');
+        }
         $roles = Role::all();
         return view('admins.create',compact('roles'));
     }
@@ -67,6 +71,9 @@ class AdminsController extends Controller
     //修改管理员账号
     public function edit(Admin $admin)
     {
+        if (!Auth::user()->can('管理员修改')){
+            return view('403');
+        }
         $roles = Role::all();
         //管理员角色返回集合
         $collection = $admin -> getRoleNames();
@@ -105,6 +112,9 @@ class AdminsController extends Controller
     //删除管理员账号
     public function destroy(Admin $admin)
     {
+        if (!Auth::user()->can('管理员删除')){
+            return view('403');
+        }
         $admin->delete();
         return redirect()->route('admins.index')->with('success','删除成功!');
     }

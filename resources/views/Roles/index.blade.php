@@ -1,19 +1,22 @@
 @extends('default')
 @section('contents')
     <h2>角色列表</h2>
-
+    @role('终极超级管理员所有权限')
      <a class="btn btn-primary" href="{{route('roles.create')}}" style="float: right;margin: 20px"><span class="glyphicon glyphicon-plus"></span>&emsp;添加角色</a>
-
+    @endrole
     <table class="table table-bordered" style="text-align: center">
         <tr>
             <th style="text-align: center">角色ID</th>
             <th style="text-align: center">角色名称</th>
+            @role('终极超级管理员所有权限')
             <th width="30%" style="text-align: center">操作</th>
+            @endrole
         </tr>
         @foreach($roles as $role)
         <tr>
             <td>{{$role->id}}</td>
             <td>{{$role->name}}</td>
+            @role('终极超级管理员所有权限')
             <td style="padding-left: 80px">
                 <div class="row">
                     <div class="col-xs-2">
@@ -35,6 +38,7 @@
                     </div>
                 </div>
             </td>
+            @endrole
         </tr>
             @endforeach
     </table>
