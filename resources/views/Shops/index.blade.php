@@ -1,9 +1,9 @@
 @extends('default')
 @section('contents')
     <h2>入驻商家管理</h2>
-
+    @role('商家入驻部')
     <a class="btn btn-primary" href="{{route('shops.create')}}" style="float: right;margin: 20px"><span class="glyphicon glyphicon-plus"></span>&emsp;添加商家</a>
-
+    @endrole
     <table class="table table-bordered" style="text-align: center">
         <tr>
             <th style="text-align: center">ID</th>
@@ -33,6 +33,7 @@
                         <div class="col-xs-2">
                             <a href="{{route('shops.show',[$shop])}}" class="btn btn-info"><span class="glyphicon glyphicon-eye-open"></span></a>
                         </div>
+                        @role('商家入驻部')
                         <div class="col-xs-2" style="margin-left: 5px">
                             <a href="{{route('shops.edit',[$shop])}}" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span></a>
                         </div>
@@ -43,6 +44,7 @@
                                 {{method_field('DELETE')}}
                             </form>
                         </div>
+                        @endrole
                     </div>
                 </td>
             </tr>

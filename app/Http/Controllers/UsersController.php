@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', [
+            'only' => ['index']
+        ]);
+    }
     //账户列表
     public function index()
     {

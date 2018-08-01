@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class ActivitiesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', [
+            'only' => ['index']
+        ]);
+    }
+
     //活动列表
     public function index(Request $request)
     {

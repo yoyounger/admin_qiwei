@@ -14,6 +14,16 @@
                 <td>邮箱</td>
                 <td><input type="text" name="email" class="form-control" value="{{$admin->email}}"></td>
             </tr>
+
+            <tr>
+                <td>管理员角色</td>
+                <td>
+                    @foreach($roles as $role)
+                        <label><input type="checkbox" value="{{$role->name}}" name="roles[]" @if(in_array($role->name,$roles_admin)) checked @endif>
+                            {{$role->name}}</label>
+                    @endforeach
+                </td>
+            </tr>
             <tr>
                 <td></td>
                 <td><button type="submit" class="btn btn-primary">保存</button></td>

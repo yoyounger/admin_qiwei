@@ -19,7 +19,7 @@
                 <li class="active"><a href=""><span class="glyphicon glyphicon-tree-conifer"></span>&emsp;首页 <span
                                 class="sr-only">(current)</span></a></li>
                 <li><a href="{{route('admins.index')}}"><span class="glyphicon glyphicon-education"></span>&emsp;管理员列表</a></li>
-                <li><a href=""><span class="glyphicon glyphicon-question-sign"></span>&emsp;列表</a></li>
+                @role('终极超级管理员所有权限')
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false"><span class="glyphicon glyphicon-tasks"></span>&emsp;权限管理 <span
@@ -29,12 +29,13 @@
                         <li><a href="{{route('roles.index')}}">角色管理</a></li>
                     </ul>
                 </li>
+                @endrole
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
                 @guest
-                <li><a data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-user" ></span>&emsp;登录</a></li>
-@endguest
+                <li><a href="{{route('login')}}"><span class="glyphicon glyphicon-user"></span>&emsp;登录</a></li>
+                @endguest
                 @auth
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"

@@ -17,17 +17,17 @@
             <td style="padding-left: 80px">
                 <div class="row">
                     <div class="col-xs-2">
-                        <a href="" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span></a>
+                        <a href="{{route('roles.edit',[$role])}}" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span></a>
                     </div>
                     <div class="col-xs-1">
                     </div>
                     <div class="col-xs-2">
-                        <a href="{{route('roles.show',$role)}}" class="btn btn-info"><span class="glyphicon glyphicon-leaf"></span></a>
+                        <a href="{{route('roles.show',[$role])}}" class="btn btn-info"><span class="glyphicon glyphicon-leaf"></span></a>
                     </div>
                     <div class="col-xs-1">
                     </div>
                     <div class="col-xs-2">
-                        <form action="" method="post">
+                        <form action="{{route('roles.destroy',[$role])}}" method="post">
                             <button class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
                             {{csrf_field()}}
                             {{method_field('DELETE')}}

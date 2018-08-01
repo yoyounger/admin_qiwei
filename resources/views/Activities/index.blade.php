@@ -30,7 +30,10 @@
             </form>
         </li>
     </ul>
+    <br>
+    @role('活动部')
     <a href="{{route('activities.create')}}" class="btn btn-primary" style="float: right;margin: 20px"><span class="glyphicon glyphicon-plus"></span>添加活动</a>
+    @endrole
     <table class="table table-bordered table-hover" style="text-align: center">
         <tr>
             <th style="text-align: center">序号</th>
@@ -55,9 +58,12 @@
                     <div class="col-xs-2">
                         <a href="{{route('activities.show',[$activity])}}" class="btn btn-info"><span class="glyphicon glyphicon-eye-open"></span></a>
                     </div>
+                    @role('活动部')
                     <div class="col-xs-2">
                         <a href="{{route('activities.edit',[$activity])}}" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span></a>
                     </div>
+                    @endrole
+                    @role('活动部老大')
                     <div class="col-xs-2">
                         <form action="{{route('activities.destroy',[$activity])}}">
                             <button class="btn btn-danger"><span class="glyphicon glyphicon-paste"></span></button>
@@ -65,6 +71,7 @@
                             {{method_field('DELETE')}}
                         </form>
                     </div>
+                    @endrole
                 </div>
             </td>
         </tr>

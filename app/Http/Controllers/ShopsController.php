@@ -11,6 +11,12 @@ use Illuminate\Support\Facades\Storage;
 
 class ShopsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', [
+            'only' => ['index']
+        ]);
+    }
     //商家列表
     public function index()
     {

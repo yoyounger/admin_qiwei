@@ -22,6 +22,7 @@
                 </td>
             </tr>
             @endforeach
+            @role('会员管理部')
             <tr>
                 <td>操作</td>
                 <td><form action="{{route('change')}}" method="get">
@@ -36,5 +37,6 @@
                         {{csrf_field()}}
                     </form></td>
             </tr>
+            @endrole
         </table>
 @stop

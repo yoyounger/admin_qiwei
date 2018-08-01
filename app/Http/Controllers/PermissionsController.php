@@ -7,6 +7,12 @@ use Spatie\Permission\Models\Permission;
 
 class PermissionsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', [
+            'only' => ['index']
+        ]);
+    }
     //权限列表
     public function index()
     {

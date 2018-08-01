@@ -29,7 +29,7 @@
                 <td>
                     <div class="input-group">
                         <span class="input-group-addon glyphicon glyphicon-lock" ></span>
-                        <input type="text" name="password" class="form-control" value="{{old('password')}}">
+                        <input type="password" name="password" class="form-control" value="{{old('password')}}">
                     </div>
                     </td>
             </tr>
@@ -38,8 +38,17 @@
                 <td>
                     <div class="input-group">
                         <span class="input-group-addon glyphicon glyphicon-lock" ></span>
-                        <input type="text" name="repassword" class="form-control"  >
+                        <input type="password" name="repassword" class="form-control"  >
                     </div>
+                </td>
+            </tr>
+            <tr>
+                <td>管理员角色</td>
+                <td>
+                    @foreach($roles as $role)
+                        <label><input type="checkbox" value="{{$role->id}}" name="roles[]">
+                            {{$role->name}}</label>
+                    @endforeach
                 </td>
             </tr>
             <tr>

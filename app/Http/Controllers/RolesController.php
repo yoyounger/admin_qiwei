@@ -3,12 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class RolesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', [
+            'only' => ['index']
+        ]);
+    }
     //角色管理列表
     public function index()
     {
@@ -42,9 +47,34 @@ class RolesController extends Controller
     //查看
     public function show(Role $role)
     {
-        $permissions = DB::select("SELECT name from role_has_permissions
-INNER JOIN permissions on role_has_permissions.permission_id = permissions.id 
-WHERE '{$role->id}'");
+        $permissions = Permission::all();
         return view('Roles/show',compact('role','permissions'));
+    }
+    //修改
+    public function edit(Role $role)
+    {
+        //获取所有的权限
+        $permissions = Permission::all();
+        return view('Roles/edit',compact('role','permissions'));
+    }
+
+    public function update(Role $role,Request $request)
+    {
+        $this->validate($request,[
+            'name'=>'required',
+            'permissions'=>'required',
+        ],[
+            'name.required'=>'角色名称不能为空!',
+            'permissions.required'=>'必须选择角色权限!'
+        ]);
+        $role->update(['name'=>$request->name]);
+        $role->syncPermissions([$request->permissions]);
+        return redirect()->route('roles.index')->with('success','修改成功!');
+    }
+    //删除角色
+    public function destroy(Role $role)
+    {
+        $role->delete();
+        return redirect()->route('roles.index')->with('success','删除成功!');
     }
 }

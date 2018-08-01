@@ -125,6 +125,7 @@
                     @if($shop->status == 1) 正常 @elseif($shop->status == 0) 未审核 @else 禁用 @endif
                 </td>
             </tr>
+            @role('商家审核')
             <tr>
                 <td></td>
                 <td>
@@ -141,5 +142,6 @@
                     </form>
                 </td>
             </tr>
+            @endrole
         </table>
 @stop

@@ -22,6 +22,7 @@
                 <td>@if($user->status) <span style="color: green">启用</span>@else <span style="color: red">禁用</span> @endif</td>
                 <td style="padding-left: 20px">
                     <div class="row">
+                        @role('商家账户审核')
                         <div class="col-xs-2">
                     <form action="{{route('no')}}" method="post">
                         <input type="hidden" value="{{$user->status}}" name="status">
@@ -35,8 +36,10 @@
                         {{csrf_field()}}
                     </form>
                         </div>
+                        @endrole
                         <div class="col-xs-2">
                         </div>
+                        @role('商家账户部')
                         <div class="col-xs-2">
                             <a href="{{route('set',[$user])}}" class="btn btn-primary">重置密码</a>
                         </div>
@@ -49,7 +52,7 @@
                                 {{method_field('DELETE')}}
                             </form>
                         </div>
-
+                        @endrole
                     </div>
                 </td>
             </tr>

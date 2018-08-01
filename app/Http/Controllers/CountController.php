@@ -9,6 +9,12 @@ use Illuminate\Support\Facades\DB;
 
 class CountController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', [
+            'only' => ['CountOrder','CountMenu']
+        ]);
+    }
     //商家的订单量的统计
     public function CountOrder(Request $request)
     {

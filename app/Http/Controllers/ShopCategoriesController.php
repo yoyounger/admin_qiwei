@@ -10,6 +10,12 @@ use Psy\Util\Str;
 
 class ShopCategoriesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', [
+            'only' => ['index']
+        ]);
+    }
     //分类列表
     public function index()
     {

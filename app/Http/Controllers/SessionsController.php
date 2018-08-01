@@ -9,6 +9,13 @@ use Illuminate\Support\Facades\Hash;
 
 class SessionsController extends Controller
 {
+
+    //登录页面
+    public function login()
+    {
+        return view('Sessions/login');
+    }
+
     //登录验证
     public function store(Request $request)
     {
