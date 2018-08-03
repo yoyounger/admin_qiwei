@@ -30,30 +30,11 @@
 
 @include('_nav')
 
-
-
-
 <div class="row container-fluid" >
     <div class="list-group col-xs-2">
         <ul class="nav nav-pills nav-stacked">
-            @foreach(\App\Models\Nav::all() as $nav)
-                @if($nav->pid == 0)
-                    <li class="dropdown">
-                        <a href="{{route($nav->url)}}" class="dropdown-toggle list-group-item" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false">{{$nav->name}}<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            @foreach(\App\Models\Nav::all() as $val)
-                                @if($val->pid == $nav->id)
-                                    <li><a href="{{route($val->url)}}">{{$val->name}}</a></li>
-                                @endif
-                            @endforeach
-                        </ul>
-                    </li>
-                @endif
-            @endforeach
+           {!! \App\Models\Nav::getHtml()!!}
         </ul>
-
-
     </div>
     <div class="col-xs-1">
     </div>

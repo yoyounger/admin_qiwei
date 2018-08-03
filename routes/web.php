@@ -29,7 +29,7 @@ Route::resource('admins','AdminsController');
 //管理员登录
 Route::get('login','SessionsController@login')->name('login');
 Route::post('login','SessionsController@store')->name('login');
-Route::delete('logout','SessionsController@destroy')->name('logout');
+Route::get('logout','SessionsController@destroy')->name('logout');
 //管理员登录修改个人密码
 Route::post('password','SessionsController@password')->name('password');
 Route::get('reset','SessionsController@reset')->name('reset');
@@ -58,3 +58,9 @@ Route::resource('roles','RolesController');
 //导航菜单
 Route::resource('navs','NavsController');
 Route::get('left','NavsController@left')->name('left');
+//抽奖活动表
+Route::resource('events','EventsController');
+Route::resource('eventprizes','EventPrizesController');
+Route::resource('eventmembers','EventMembersController');
+//开奖
+Route::get('prize/{id}','EventMembersController@prize')->name('prize');

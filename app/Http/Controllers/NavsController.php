@@ -92,7 +92,7 @@ class NavsController extends Controller
         if (!Auth::user()->can('导航菜单管理增删改')){
             return view('403');
         }
-        $res = Nav::where('pid',$nav->id)->get();
+        $res = Nav::where('pid',$nav->id)->first();
         if ($res){
             return back()->with('danger','该分类下有菜单不能删除!')->withInput();
         }

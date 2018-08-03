@@ -19,19 +19,6 @@
                 <li class="active"><a href=""><span class="glyphicon glyphicon-tree-conifer"></span>&emsp;首页 <span
                                 class="sr-only">(current)</span></a></li>
                 <li><a href="{{route('admins.index')}}"><span class="glyphicon glyphicon-education"></span>&emsp;管理员列表</a></li>
-                {{--@role('终极超级管理员所有权限')--}}
-
-                    {{--<li class="dropdown">--}}
-                        {{--<a href="#" class="dropdown-toggle list-group-item" data-toggle="dropdown" role="button" aria-haspopup="true"--}}
-                           {{--aria-expanded="false"><span class="caret"></span></a>--}}
-                        {{--<ul class="dropdown-menu">--}}
-                            {{--<li><a href="{{route('permissions.index')}}">权限列表</a></li>--}}
-                            {{--<li><a href="{{route('roles.index')}}">角色管理</a></li>--}}
-                        {{--</ul>--}}
-                    {{--</li>--}}
-
-                {{--@endrole--}}
-
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
@@ -48,11 +35,7 @@
                         <li><a href="{{route('reset')}}"><span class="glyphicon glyphicon-scissors"></span>&emsp;修改密码</a></li>
                         <li role="separator" class="divider"></li>
                         <li>
-                            <form action="{{route('logout')}}" method="post">
-                                <button class="btn btn-link"><span class="glyphicon glyphicon-off"></span>&emsp;安全退出</button>
-                                {{method_field('DELETE')}}
-                                {{csrf_field()}}
-                            </form>
+                            <a href="{{route('logout')}}"><span class="glyphicon glyphicon-off"></span>&emsp;安全退出</a>
                         </li>
                     </ul>
                 </li>

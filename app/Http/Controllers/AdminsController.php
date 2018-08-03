@@ -10,6 +10,12 @@ use Spatie\Permission\Models\Role;
 
 class AdminsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', [
+            'only' => ['index']
+        ]);
+    }
     //管理员列表
     public function index()
     {

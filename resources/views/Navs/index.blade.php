@@ -34,7 +34,7 @@
                     <div class="col-xs-1">
                     </div>
                     <div class="col-xs-2">
-                        <form action="" method="post">
+                        <form action="{{route('navs.destroy',[$nav])}}" method="post">
                             <button class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
                             {{csrf_field()}}
                             {{method_field('DELETE')}}
