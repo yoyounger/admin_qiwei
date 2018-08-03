@@ -42,7 +42,7 @@ class AdminsController extends Controller
             return view('403');
         }
         $roles = Role::all();
-        return view('admins.create',compact('roles'));
+        return view('Admins/create',compact('roles'));
     }
 
     public function store(Request $request)
